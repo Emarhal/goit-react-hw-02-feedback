@@ -1,31 +1,16 @@
 import React, { Component } from "react";
 import Feedback from "./feedback/Feedback";
-import Section from "./section/Section";
+import Section from "./feedback/section/Section";
+import Statistics from "./feedback/statistics/Statistics";
 
 class App extends Component {
   state = { good: 0, neutral: 0, bad: 0 };
 
-  addToGood = () => {
+  onLeaveFeedback = (scoreName) => {
     this.setState((prevState) => {
-      const { good } = prevState;
+      const oldValue = prevState[scoreName];
       return {
-        good: good + 1,
-      };
-    });
-  };
-  addToNeutral = () => {
-    this.setState((prevState) => {
-      const { neutral } = prevState;
-      return {
-        neutral: neutral + 1,
-      };
-    });
-  };
-  addToBad = () => {
-    this.setState((prevState) => {
-      const { bad } = prevState;
-      return {
-        bad: bad + 1,
+        [scoreName]: oldValue + 1,
       };
     });
   };
@@ -42,18 +27,20 @@ class App extends Component {
     return positiveFeedback;
   };
   render() {
+    const total = this.countTotalFeedback();
+    const positivePercentage = this.countPositiveFeedbackPercentage();
     return (
       <>
         <Section title="Pleas live feedback">
-          <Feedback
-            addToGood={this.addToGood}
-            addToNeutral={this.addToNeutral}
-            addToBad={this.addToBad}
+          <Feedback onLeaveFeedback={this.onLeaveFeedback} />
+        </Section>
+        <Section title="Statistics">
+          <Statistics
             good={this.state.good}
-            neutral={this.state.neutral}
             bad={this.state.bad}
-            total={this.countTotalFeedback}
-            positivePercentage={this.countPositiveFeedbackPercentage}
+            neutral={this.state.neutral}
+            total={total}
+            positivePercentage={positivePercentage}
           />
         </Section>
       </>

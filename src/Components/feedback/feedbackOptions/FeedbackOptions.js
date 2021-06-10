@@ -1,20 +1,28 @@
 import React from "react";
 import styles from "./FeedbackOptions.module.css";
 
-const FeedbackOptions = ({ addToGood, addToNeutral, addToBad }) => {
+const FeedbackOptions = ({ onLeaveFeedback }) => {
   return (
     <>
-      <button type="button" className={styles.good} onClick={() => addToGood()}>
+      <button
+        type="button"
+        className={styles.good}
+        onClick={() => onLeaveFeedback("good")}
+      >
         Good
       </button>
       <button
         type="button"
         className={styles.neutral}
-        onClick={() => addToNeutral()}
+        onClick={() => onLeaveFeedback("neutral")}
       >
         Neutral
       </button>
-      <button type="button" className={styles.bad} onClick={() => addToBad()}>
+      <button
+        type="button"
+        className={styles.bad}
+        onClick={() => onLeaveFeedback("bad")}
+      >
         Bad
       </button>
     </>
