@@ -5,7 +5,6 @@ import "./index.css";
 
 ReactDOM.render(
   <>
-    {/* <h2>Hello</h2> */}
     <App />
   </>,
   document.getElementById("root")
